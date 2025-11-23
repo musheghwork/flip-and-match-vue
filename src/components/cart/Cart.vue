@@ -3,9 +3,19 @@ const props = defineProps({
   number: Number,
   flipped: Boolean,
   matches: Boolean,
+  gameMode: String,
 });
+const imgType = props.gameMode == "dragon" ? "png" : "jpg";
+const imgUrl =
+  props.gameMode == "dragon"
+    ? "../../assets/back-dragon.png"
+    : "../../assets/back.png";
+console.log(imgUrl);
 function getImageUrl(number) {
-  return new URL(`../../assets/${number}.jpg`, import.meta.url).href;
+  return new URL(`../../assets/${number}.${imgType}`, import.meta.url).href;
+}
+function getBgUrl() {
+  return new URL(imgUrl, import.meta.url).href;
 }
 </script>
 
@@ -16,7 +26,7 @@ function getImageUrl(number) {
         <img :src="getImageUrl(number)" />
       </div>
       <div class="card-back">
-        <img src="../../assets/back.png" alt="Card back" />
+        <img :src="getBgUrl()" alt="Card back" />
       </div>
     </div>
   </div>
@@ -25,8 +35,9 @@ function getImageUrl(number) {
 <style scoped>
 .card-container {
   perspective: 1000px;
-  width: 190px;
-  height: 200px;
+  min-width: 50px;
+  max-width: 155px;
+  aspect-ratio: 2 / 3;
 }
 
 .card {
@@ -34,7 +45,7 @@ function getImageUrl(number) {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease;
   cursor: pointer;
 }
 
@@ -45,41 +56,29 @@ function getImageUrl(number) {
 .card-front,
 .card-back {
   position: absolute;
-  width: 155px;
-  height: 230px;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
+  overflow: hidden;
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 7em;
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-front {
-  left: 70px;
-  top: 50px;
-  background-color: #f2f2f2;
-  height: 190px;
-  width: 140px;
-  color: #333;
-  overflow: hidden;
-}
-.card-front img {
-  height: 190px;
-  width: 130px;
+  transform: rotateY(0deg);
 }
 
 .card-back {
   transform: rotateY(180deg);
-  overflow: hidden;
 }
 
-img {
-  height: 230px;
-  object-fit: cover;
-  border-radius: 12px;
-}
 .matches {
-  background-color: rgb(35, 211, 35);
+  border: 3px solid rgb(35, 211, 35);
 }
 </style>
