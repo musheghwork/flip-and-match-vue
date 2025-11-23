@@ -11,7 +11,7 @@ const imgType = props.gameMode === "dragon" ? "png" : "jpg";
 const bgUrl = props.gameMode === "dragon" ? "/back-dragon.png" : "/back.png";
 
 function getImageUrl(number) {
-  return new URL(`../../assets/${number}.${imgType}`, import.meta.url).href;
+  return `/${number}.${imgType}`;
 }
 </script>
 
@@ -19,7 +19,7 @@ function getImageUrl(number) {
   <div class="card-container">
     <div class="card" :class="{ flipped: props.flipped }">
       <div class="card-front" :class="{ matches: props.matches }">
-        <img :src="getImageUrl(props.number)" />
+        <img :src="getImageUrl(props.number)" alt="Card front" />
       </div>
       <div class="card-back">
         <img :src="bgUrl" alt="Card back" />
