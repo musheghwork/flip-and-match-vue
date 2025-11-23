@@ -5,7 +5,7 @@ import { useGame } from "../../hooks/useGame";
 
 const { data, gameStarted, startGame, handleCardClick } = useGame();
 
-const gameMode = ref("classic");
+const gameMode = ref("dragon");
 
 function chageGameMod(props) {
   gameStarted.value = false;
