@@ -22,7 +22,6 @@ function rematch() {
 <template>
   <div class="settings">
     <div class="mode-block">
-      <h3>Game Mode</h3>
       <button
         :class="{ active: gameMode === 'classic' }"
         @click="chageGameMod('classic')"
@@ -60,11 +59,6 @@ function rematch() {
 </template>
 
 <style scoped>
-.settings h3 {
-  font-weight: 600;
-  font-size: 30px;
-  color: #764ba2;
-}
 .settings {
   display: flex;
   justify-content: center;
